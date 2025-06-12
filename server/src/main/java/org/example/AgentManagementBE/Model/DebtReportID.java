@@ -1,48 +1,48 @@
 package org.example.AgentManagementBE.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
-public class DebtReportID implements Serializable {
+public class DebtReportID implements Serializable 
+{
+    @Column(name = "monthTime") // tháng
     private int month;
+    @Column(name = "yearTime") // năm
     private int year;
-
     @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private Agent agent;
+    @JoinColumn(name = "agentID") // mã đại lý
+    private Agent agentID;
 
-    public DebtReportID() {}
 
-    public DebtReportID(int month, int year, Agent agent) {
+    public DebtReportID() 
+    {
+
+    }
+
+    public DebtReportID(int month, int year, Agent agentID) 
+    {
         this.month = month;
         this.year = year;
-        this.agent = agent;
+        this.agentID = agentID;
     }
 
-    // Getters and Setters
-    public int getMonth() { return month; }
-    public void setMonth(int month) { this.month = month; }
-
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
-
-    public Agent getAgent() { return agent; }
-    public void setAgent(Agent agent) { this.agent = agent; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DebtReportID)) return false;
-        DebtReportID that = (DebtReportID) o;
-        return month == that.month &&
-               year == that.year &&
-               Objects.equals(agent.getAgentID(), that.agent.getAgentID());
+    public int getMonth() 
+    {
+        return month;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(month, year, agent.getAgentID());
+    public int getYear() 
+    {
+        return year;
+    }
+
+    public Agent getAgentID() 
+    {
+        return agentID;
     }
 }
