@@ -2,39 +2,43 @@ package org.example.AgentManagementBE.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "Unit") // Tên bảng trùng với tên trong Flyway
-public class Unit {
-
+@Entity(name = "Unit")
+public class Unit 
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Tương thích với SERIAL trong PostgreSQL
-    @Column(name = "unitID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "unitID") // mã đơn vị tính
     private int unitID;
-
-    @Column(name = "unitName", nullable = false, length = 255)
+    @Column(name = "unitName",nullable = false,columnDefinition = "VARCHAR(255)") // tên đơn vị tính
     private String unitName;
 
-    // Constructors
-    public Unit() {}
+    public Unit() 
+    {
 
-    public Unit(String unitName) {
+    }
+
+    public Unit(String unitName) 
+    {
         this.unitName = unitName;
     }
 
-    // Getters & Setters
-    public int getUnitID() {
+    public int getUnitID() 
+    {
         return unitID;
     }
 
-    public void setUnitID(int unitID) {
+    public void setUnitID(int unitID) 
+    {
         this.unitID = unitID;
     }
 
-    public String getUnitName() {
+    public String getUnitName() 
+    {
         return unitName;
     }
 
-    public void setUnitName(String unitName) {
+    public void setUnitName(String unitName) 
+    {
         this.unitName = unitName;
     }
 }
