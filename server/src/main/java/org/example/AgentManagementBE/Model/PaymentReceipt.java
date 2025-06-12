@@ -1,87 +1,67 @@
-package org.example.AgentManagementBE.Model;
-
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.util.Date;
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class PaymentReceipt 
-{
+public class PaymentReceipt {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "paymentReceiptID") // mã phiếu thu tiền
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paymentReceiptID")
     private int paymentReceiptID;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    @Column(name = "paymentDate",nullable = false) // ngày thu
+    @Column(name = "paymentDate", nullable = false, updatable = false)
     private Date paymentDate;
 
-    @Column(name = "revenue",nullable = false) // tiền thu
+    @Column(name = "revenue", nullable = false)
     private int revenue;
 
     @ManyToOne
-    @JoinColumn(name = "agentID")
+    @JoinColumn(name = "agentID", nullable = false)
     private Agent agentID;
 
-    public PaymentReceipt() 
-    {
-        
-    }
-    public PaymentReceipt(int revenue, Agent agentID) 
-    {
+    public PaymentReceipt() {}
+
+    public PaymentReceipt(int revenue, Agent agentID) {
         this.revenue = revenue;
         this.agentID = agentID;
     }
 
-    public PaymentReceipt(int paymentReceiptID, Date paymentDate, int revenue, Agent agentID) 
-    {
-        this.paymentReceiptID = paymentReceiptID;
-        this.paymentDate = paymentDate;
-        this.revenue = revenue;
-        this.agentID = agentID;
-    }
-
-    public int getPaymentReceiptID() 
-    {
+    public int getPaymentReceiptID() {
         return paymentReceiptID;
     }
 
-    public void setPaymentReceiptID(int paymentReceiptID) 
-    {
+    public void setPaymentReceiptID(int paymentReceiptID) {
         this.paymentReceiptID = paymentReceiptID;
     }
 
-    public Date getPaymentDate() 
-    {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) 
-    {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public int getRevenue() 
-    {
+    public int getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(int revenue) 
-    {
+    public void setRevenue(int revenue) {
         this.revenue = revenue;
     }
 
-    public Agent getAgentID() 
-    {
+    public Agent getAgentID() {
         return agentID;
     }
 
-    public void setAgentID(Agent agentID) 
-    {
+    public void setAgentID(Agent agentID) {
         this.agentID = agentID;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.paymentDate == null) {
+            this.paymentDate = new Date();
+        }
     }
 }
