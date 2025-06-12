@@ -3,110 +3,112 @@ package org.example.AgentManagementBE.Model;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ExportReceipt {
-
+public class ExportReceipt 
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exportReceiptID")
+    @Column(name = "exportReceiptID") // mã phiếu xuất
     private int exportReceiptID;
 
-    @CreatedDate
-    @Column(name = "dateReceipt", nullable = false, updatable = false)
+    @Column(name = "dateReceipt", nullable = false) // ngày lập phiếu
     private Date dateReceipt;
 
     @ManyToOne
-    @JoinColumn(name = "agentID", nullable = false)
-    private Agent agent;
+    @JoinColumn(name = "agentID", nullable = false) // mã đại lý
+    private Agent agentID;
 
-    @Column(name = "totalMoney")
+    @Column(name = "totalMoney") // tổng tiền
     private int totalMoney;
 
-    @Column(name = "paymentAmount")
+    @Column(name = "paymentAmount") // số tiền thanh toán
     private int paymentAmount;
 
-    @Column(name = "remainAmount")
+    @Column(name = "remainAmount") // số tiền còn lại
     private int remainAmount;
 
-    @OneToMany(mappedBy = "exportReceipt", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExportDetail> exportDetails = new ArrayList<>();
 
-    // --- Constructors ---
-    public ExportReceipt() {
+
+    public ExportReceipt() 
+    {
     }
 
-    public ExportReceipt(Agent agent, int totalMoney, int paymentAmount, int remainAmount) {
-        this.agent = agent;
+    public ExportReceipt(int exportReceiptID) 
+    {
+        this.exportReceiptID = exportReceiptID;
+    }
+
+    public ExportReceipt(Agent agentID, int totalMoney, int paymentAmount, int remainAmount) 
+    {
+        this.agentID = agentID;
         this.totalMoney = totalMoney;
         this.paymentAmount = paymentAmount;
         this.remainAmount = remainAmount;
     }
 
-    public ExportReceipt(int exportReceiptID) {
-        this.exportReceiptID = exportReceiptID;
-    }
-
-    // --- Getters & Setters ---
-
-    public int getExportReceiptID() {
+    public int getExportReceiptID() 
+    {
         return exportReceiptID;
     }
 
-    public void setExportReceiptID(int exportReceiptID) {
+    public void setExportReceiptID(int exportReceiptID) 
+    {
         this.exportReceiptID = exportReceiptID;
     }
 
-    public Date getDateReceipt() {
+    public Date getDateReceipt() 
+    {
         return dateReceipt;
     }
 
-    public void setDateReceipt(Date dateReceipt) {
+    public void setDateReceipt(Date dateReceipt) 
+    {
         this.dateReceipt = dateReceipt;
     }
 
-    public Agent getAgent() {
-        return agent;
+    public Agent getAgentID() {
+        return agentID;
     }
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
+    public void setAgentID(Agent agentID) 
+    {
+        this.agentID = agentID;
     }
 
-    public int getTotalMoney() {
+    public int getTotalMoney() 
+    {
         return totalMoney;
     }
 
-    public void setTotalMoney(int totalMoney) {
+    public void setTotalMoney(int totalMoney) 
+    {
         this.totalMoney = totalMoney;
     }
 
-    public int getPaymentAmount() {
+    public int getPaymentAmount() 
+    {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(int paymentAmount) {
+    public void setPaymentAmount(int paymentAmount) 
+    {
         this.paymentAmount = paymentAmount;
     }
 
-    public int getRemainAmount() {
+    public int getRemainAmount() 
+    {
         return remainAmount;
     }
 
-    public void setRemainAmount(int remainAmount) {
+    public void setRemainAmount(int remainAmount) 
+    {
         this.remainAmount = remainAmount;
     }
 
-    public List<ExportDetail> getExportDetails() {
-        return exportDetails;
-    }
-
-    public void setExportDetails(List<ExportDetail> exportDetails) {
-        this.exportDetails = exportDetails;
-    }
+  
 }
