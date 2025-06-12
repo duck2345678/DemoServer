@@ -15,9 +15,9 @@ public class Agent
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "agentID")// mã đại lý
     private int agentID;
-    @Column(name = "agentName",nullable = false,columnDefinition = "NVARCHAR(255)")
+    @Column(name = "agentName",nullable = false,columnDefinition = "VARCHAR(255)")
     private String agentName;
-    @Column(name = "address",nullable = false,columnDefinition = "NVARCHAR(255)")
+    @Column(name = "address",nullable = false,columnDefinition = "VARCHAR(255)")
     private String address;
     @Column(name = "phone",nullable = false)
     private String phone;
