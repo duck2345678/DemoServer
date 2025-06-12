@@ -2,7 +2,6 @@ package org.example.AgentManagementBE.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
@@ -10,16 +9,14 @@ import lombok.Getter;
 public class Parameter 
 {
     @Id
-    @Column(name = "parameterName",columnDefinition = "NVARCHAR(255)") // tên tham số
+    @Column(name = "parameterName", length = 255, nullable = false) // tên tham số
     private String parameterName;
+
     @Getter
-    @Column(name = "parameterValue",nullable = false) // giá trị tham số
+    @Column(name = "parameterValue", nullable = false) // giá trị tham số
     private int parameterValue;
 
-    public Parameter() 
-    {
-
-    }
+    public Parameter() {}
 
     public Parameter(String parameterName, int parameterValue) 
     {
@@ -42,8 +39,8 @@ public class Parameter
         this.parameterValue = parameterValue;
     }
 
-	public int getParameterValue() 
+    public int getParameterValue() 
     {
-		return this.parameterValue;
-	}
+        return this.parameterValue;
+    }
 }
