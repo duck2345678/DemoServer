@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS person (
+    personID SERIAL PRIMARY KEY,
+    personLastName VARCHAR(255) NOT NULL,
+    personName VARCHAR(255) NOT NULL,
+    personSDT VARCHAR(50) NOT NULL,
+    personEmail VARCHAR(255) NOT NULL UNIQUE,
+    personPassword VARCHAR(255) NOT NULL
+);
