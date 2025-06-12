@@ -9,7 +9,7 @@ public class AgentType
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "agentTypeID")
     private int agentTypeID;
-    @Column(name = "agentTypeName",nullable = false,columnDefinition = "NVARCHAR(255)")
+    @Column(name = "agentTypeName",nullable = false,columnDefinition = "VARCHAR(255)")
 
     private String agentTypeName;
     @Column(name = "maximumDebt",nullable = false) // số tiền nợ tối đa
