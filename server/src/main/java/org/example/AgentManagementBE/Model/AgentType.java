@@ -9,10 +9,12 @@ public class AgentType
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "agentTypeID")
     private int agentTypeID;
-    @Column(name = "agentTypeName",nullable = false,columnDefinition = "NVARCHAR(255)")
 
+    // ✅ Sửa: bỏ columnDefinition hoặc dùng VARCHAR
+    @Column(name = "agentTypeName", nullable = false, length = 255)
     private String agentTypeName;
-    @Column(name = "maximumDebt",nullable = false) // số tiền nợ tối đa
+
+    @Column(name = "maximumDebt", nullable = false) // số tiền nợ tối đa
     private int maximumDebt;
 
     public AgentType(String agentTypeName, int maximumDebt) 
@@ -21,10 +23,7 @@ public class AgentType
         this.maximumDebt = maximumDebt;
     }
 
-    public AgentType() {
-
-    }
-
+    public AgentType() { }
 
     public int getAgentTypeID() 
     {
