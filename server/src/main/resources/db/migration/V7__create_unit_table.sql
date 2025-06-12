@@ -1,0 +1,4 @@
+CREATE TABLE Unit (
+    unitID SERIAL PRIMARY KEY,
+    unitName VARCHAR(255) NOT NULL
+);
