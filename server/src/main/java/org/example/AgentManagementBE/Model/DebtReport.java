@@ -1,49 +1,58 @@
+package org.example.AgentManagementBE.Model;
+
+import jakarta.persistence.*;
+
 @Entity
-public class DebtReport {
+public class AgentType 
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "agentTypeID")
+    private int agentTypeID;
+    @Column(name = "agentTypeName",nullable = false,columnDefinition = "NVARCHAR(255)")
 
-    @EmbeddedId
-    private DebtReportID debtReportID;
+    private String agentTypeName;
+    @Column(name = "maximumDebt",nullable = false) // số tiền nợ tối đa
+    private int maximumDebt;
 
-    // Map lại quan hệ bằng cách lấy agentID từ EmbeddedId
-    @ManyToOne
-    @JoinColumn(name = "agentID", insertable = false, updatable = false)
-    private Agent agent;
-
-    @Column(name = "firstDebt")
-    private int firstDebt;
-
-    @Column(name = "lastDebt")
-    private int lastDebt;
-
-    @Column(name = "arisenDebt")
-    private int arisenDebt;
-
-    public DebtReport() {}
-
-    public DebtReport(DebtReportID debtReportID, int firstDebt, int lastDebt, int arisenDebt) {
-        this.debtReportID = debtReportID;
-        this.firstDebt = firstDebt;
-        this.lastDebt = lastDebt;
-        this.arisenDebt = arisenDebt;
+    public AgentType(String agentTypeName, int maximumDebt) 
+    {
+        this.agentTypeName = agentTypeName;
+        this.maximumDebt = maximumDebt;
     }
 
-    public DebtReportID getDebtReportID() { return debtReportID; }
+    public AgentType() {
 
-    public void setDebtReportID(DebtReportID debtReportID) { this.debtReportID = debtReportID; }
+    }
 
-    public Agent getAgent() { return agent; }
 
-    public void setAgent(Agent agent) { this.agent = agent; }
+    public int getAgentTypeID() 
+    {
+        return agentTypeID;
+    }
 
-    public int getFirstDebt() { return firstDebt; }
+    public void setAgentTypeID(int agentTypeID) 
+    {
+        this.agentTypeID = agentTypeID;
+    }
 
-    public void setFirstDebt(int firstDebt) { this.firstDebt = firstDebt; }
+    public String getAgentTypeName() 
+    {
+        return agentTypeName;
+    }
 
-    public int getLastDebt() { return lastDebt; }
+    public void setAgentTypeName(String agentTypeName) 
+    {
+        this.agentTypeName = agentTypeName;
+    }
 
-    public void setLastDebt(int lastDebt) { this.lastDebt = lastDebt; }
+    public int getMaximumDebt() 
+    {
+        return maximumDebt;
+    }
 
-    public int getArisenDebt() { return arisenDebt; }
-
-    public void setArisenDebt(int arisenDebt) { this.arisenDebt = arisenDebt; }
+    public void setMaximumDebt(int maximumDebt) 
+    {
+        this.maximumDebt = maximumDebt;
+    }
 }
