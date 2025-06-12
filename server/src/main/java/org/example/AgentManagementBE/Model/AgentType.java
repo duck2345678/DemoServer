@@ -3,55 +3,47 @@ package org.example.AgentManagementBE.Model;
 import jakarta.persistence.*;
 
 @Entity
-public class AgentType 
-{
+public class AgentType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "agentTypeID")
     private int agentTypeID;
 
-    // ✅ Sửa: bỏ columnDefinition hoặc dùng VARCHAR
     @Column(name = "agentTypeName", nullable = false, length = 255)
     private String agentTypeName;
 
-    @Column(name = "maximumDebt", nullable = false) // số tiền nợ tối đa
+    @Column(name = "maximumDebt", nullable = false)
     private int maximumDebt;
 
-    public AgentType(String agentTypeName, int maximumDebt) 
-    {
+    public AgentType() {}
+
+    public AgentType(String agentTypeName, int maximumDebt) {
         this.agentTypeName = agentTypeName;
         this.maximumDebt = maximumDebt;
     }
 
-    public AgentType() { }
-
-    public int getAgentTypeID() 
-    {
+    public int getAgentTypeID() {
         return agentTypeID;
     }
 
-    public void setAgentTypeID(int agentTypeID) 
-    {
+    public void setAgentTypeID(int agentTypeID) {
         this.agentTypeID = agentTypeID;
     }
 
-    public String getAgentTypeName() 
-    {
+    public String getAgentTypeName() {
         return agentTypeName;
     }
 
-    public void setAgentTypeName(String agentTypeName) 
-    {
+    public void setAgentTypeName(String agentTypeName) {
         this.agentTypeName = agentTypeName;
     }
 
-    public int getMaximumDebt() 
-    {
+    public int getMaximumDebt() {
         return maximumDebt;
     }
 
-    public void setMaximumDebt(int maximumDebt) 
-    {
+    public void setMaximumDebt(int maximumDebt) {
         this.maximumDebt = maximumDebt;
     }
 }
