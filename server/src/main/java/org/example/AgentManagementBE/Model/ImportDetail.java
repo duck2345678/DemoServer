@@ -12,54 +12,57 @@ public class ImportDetail implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "importReceiptID")
+    @JoinColumn(name = "importReceiptID", nullable = false)
     @JsonIgnore
-    private ImportReceipt importReceiptID;
+    private ImportReceipt importReceipt;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "productID") // mã sản phẩm
+    @JoinColumn(name = "productID", nullable = false)
     @JsonIgnore
-    private Product productID;
+    private Product product;
 
-    @Column(name = "quantityImport") // số lượng nhập
+    @Column(name = "quantityImport", nullable = false)
     private int quantityImport;
 
-    @Column(name = "importPrice") // giá nhập
+    @Column(name = "importPrice", nullable = false)
     private int importPrice;
 
-    @Column(name = "intoMoney") // thành tiền
+    @Column(name = "intoMoney", nullable = false)
     private int intoMoney;
 
-    @Column(name = "unit", columnDefinition = "VARCHAR(50)") // đơn vị tính
+    @Column(name = "unit", columnDefinition = "VARCHAR(50)")
     private String unit;
 
+    // --- Constructors ---
     public ImportDetail() {
     }
 
-    public ImportDetail(ImportReceipt importReceiptID, Product productID, int quantityImport, int importPrice, int intoMoney, String unit) {
-        this.importReceiptID = importReceiptID;
-        this.productID = productID;
+    public ImportDetail(ImportReceipt importReceipt, Product product, int quantityImport, int importPrice, int intoMoney, String unit) {
+        this.importReceipt = importReceipt;
+        this.product = product;
         this.quantityImport = quantityImport;
         this.importPrice = importPrice;
         this.intoMoney = intoMoney;
         this.unit = unit;
     }
 
-    public ImportReceipt getImportReceiptID() {
-        return importReceiptID;
+    // --- Getters & Setters ---
+
+    public ImportReceipt getImportReceipt() {
+        return importReceipt;
     }
 
-    public void setImportReceiptID(ImportReceipt importReceiptID) {
-        this.importReceiptID = importReceiptID;
+    public void setImportReceipt(ImportReceipt importReceipt) {
+        this.importReceipt = importReceipt;
     }
 
-    public Product getProductID() {
-        return productID;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductID(Product productID) {
-        this.productID = productID;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantityImport() {
@@ -94,33 +97,33 @@ public class ImportDetail implements Serializable {
         this.unit = unit;
     }
 
-    // Composite key class
+    // --- Composite Key Class ---
     public static class ImportDetailID implements Serializable {
-        private int importReceiptID;
-        private int productID;
+        private int importReceipt;
+        private int product;
 
         public ImportDetailID() {
         }
 
-        public ImportDetailID(int importReceiptID, int productID) {
-            this.importReceiptID = importReceiptID;
-            this.productID = productID;
+        public ImportDetailID(int importReceipt, int product) {
+            this.importReceipt = importReceipt;
+            this.product = product;
         }
 
-        public int getImportReceiptID() {
-            return importReceiptID;
+        public int getImportReceipt() {
+            return importReceipt;
         }
 
-        public void setImportReceiptID(int importReceiptID) {
-            this.importReceiptID = importReceiptID;
+        public void setImportReceipt(int importReceipt) {
+            this.importReceipt = importReceipt;
         }
 
-        public int getProductID() {
-            return productID;
+        public int getProduct() {
+            return product;
         }
 
-        public void setProductID(int productID) {
-            this.productID = productID;
+        public void setProduct(int product) {
+            this.product = product;
         }
 
         @Override
@@ -128,13 +131,13 @@ public class ImportDetail implements Serializable {
             if (this == o) return true;
             if (!(o instanceof ImportDetailID)) return false;
             ImportDetailID that = (ImportDetailID) o;
-            return importReceiptID == that.importReceiptID &&
-                   productID == that.productID;
+            return importReceipt == that.importReceipt &&
+                   product == that.product;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(importReceiptID, productID);
+            return Objects.hash(importReceipt, product);
         }
     }
 }
