@@ -3,100 +3,89 @@ package org.example.AgentManagementBE.Model;
 import jakarta.persistence.*;
 
 @Entity
-public class Product 
-{
+public class Product {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "productID") // mã sản phẩm
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    @SequenceGenerator(name = "product_seq", sequenceName = "product_sequence", allocationSize = 1)
+    @Column(name = "productID")
     private int productID;
 
-    @Column(name = "productName", columnDefinition = "NVARCHAR(255)", nullable = false) // tên sản phẩm
+    @Column(name = "productName", nullable = false)
     private String productName;
+
     @ManyToOne
-    @JoinColumn(name = "unit", nullable = false) // đơn vị tính
+    @JoinColumn(name = "unit", nullable = false)
     private Unit unit;
-    @Column(name = "importPrice", nullable = false) // giá nhập
+
+    @Column(name = "importPrice", nullable = false)
     private int importPrice;
 
-
-    @Column(name = "exportPrice") // giá xuất   
+    @Column(name = "exportPrice")
     private int exportPrice;
-    @Column(name = "inventoryQuantity")//số lượng tồn kho
+
+    @Column(name = "inventoryQuantity")
     private int inventoryQuantity;
 
-    public Product(int productID,int importPrice)
-    {
+    public Product() {
+    }
+
+    public Product(int productID, int importPrice) {
         this.productID = productID;
         this.importPrice = importPrice;
     }
-    public Product(String productName, Unit unit, int importPrice) 
-    {
+
+    public Product(String productName, Unit unit, int importPrice) {
         this.productName = productName;
         this.unit = unit;
         this.importPrice = importPrice;
     }
 
-    public Product() 
-    {
-
-    }
-
-    public int getProductID() 
-    {
+    public int getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) 
-    {
+    public void setProductID(int productID) {
         this.productID = productID;
     }
 
-    public String getProductName() 
-    {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) 
-    {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public Unit getUnit() 
-    {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(org.example.AgentManagementBE.Model.Unit unit) {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
-    public int getImportPrice() 
-    {
+    public int getImportPrice() {
         return importPrice;
     }
 
-    public void setImportPrice(int importPrice) 
-    {
+    public void setImportPrice(int importPrice) {
         this.importPrice = importPrice;
     }
 
-    public int getExportPrice() 
-    {
+    public int getExportPrice() {
         return exportPrice;
     }
 
-    public void setExportPrice(int exportPrice) 
-    {
+    public void setExportPrice(int exportPrice) {
         this.exportPrice = exportPrice;
     }
 
-    public int getInventoryQuantity() 
-    {
-        return inventoryQuantity;//so luong ton kho
+    public int getInventoryQuantity() {
+        return inventoryQuantity;
     }
 
-    public void setInventoryQuantity(int inventoryQuantity) 
-    {
+    public void setInventoryQuantity(int inventoryQuantity) {
         this.inventoryQuantity = inventoryQuantity;
     }
 }
