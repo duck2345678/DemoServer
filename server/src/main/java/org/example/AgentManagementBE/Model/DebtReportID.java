@@ -4,50 +4,45 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 import java.io.Serializable;
 
 @Embeddable
-public class DebtReportID implements Serializable {
-
-    @Column(name = "monthTime")
+public class DebtReportID implements Serializable 
+{
+    @Column(name = "monthTime") // tháng
     private int month;
-
-    @Column(name = "yearTime")
+    @Column(name = "yearTime") // năm
     private int year;
-
     @ManyToOne
-    @JoinColumn(name = "agentID")
+    @JoinColumn(name = "agentID") // mã đại lý
     private Agent agentID;
 
-    public DebtReportID() {}
 
-    public DebtReportID(int month, int year, Agent agentID) {
+    public DebtReportID() 
+    {
+
+    }
+
+    public DebtReportID(int month, int year, Agent agentID) 
+    {
         this.month = month;
         this.year = year;
         this.agentID = agentID;
     }
 
-    public int getMonth() {
+    public int getMonth() 
+    {
         return month;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
+    public int getYear() 
+    {
         return year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public Agent getAgentID() {
+    public Agent getAgentID() 
+    {
         return agentID;
-    }
-
-    public void setAgentID(Agent agentID) {
-        this.agentID = agentID;
     }
 }
