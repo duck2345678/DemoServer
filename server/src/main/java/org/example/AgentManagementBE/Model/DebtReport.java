@@ -3,56 +3,68 @@ package org.example.AgentManagementBE.Model;
 import jakarta.persistence.*;
 
 @Entity
-public class AgentType 
+public class DebtReport 
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "agentTypeID")
-    private int agentTypeID;
-    @Column(name = "agentTypeName",nullable = false,columnDefinition = "NVARCHAR(255)")
+    @EmbeddedId
+    private DebtReportID debtReportID;
 
-    private String agentTypeName;
-    @Column(name = "maximumDebt",nullable = false) // số tiền nợ tối đa
-    private int maximumDebt;
+    @Column(name = "firstDebt") // số tiền nợ đầu kỳ
+    private int firstDebt;
+    @Column(name = "lastDebt") // số tiền nợ cuối kỳ
+    private int lastDebt;
+    @Column(name = "arisenDebt") // số tiền nợ phát sinh
+    private int arisenDebt;
 
-    public AgentType(String agentTypeName, int maximumDebt) 
+    public DebtReport() 
     {
-        this.agentTypeName = agentTypeName;
-        this.maximumDebt = maximumDebt;
-    }
-
-    public AgentType() {
 
     }
 
-
-    public int getAgentTypeID() 
+    public DebtReport(DebtReportID debtReportID, int firstDebt, int lastDebt, int arisenDebt) 
     {
-        return agentTypeID;
+        this.debtReportID = debtReportID;
+        this.firstDebt = firstDebt;
+        this.lastDebt = lastDebt;
+        this.arisenDebt = arisenDebt;
     }
 
-    public void setAgentTypeID(int agentTypeID) 
+    public DebtReportID getDebtReportID() 
     {
-        this.agentTypeID = agentTypeID;
+        return debtReportID;
     }
 
-    public String getAgentTypeName() 
+    public void setDebtReportID(org.example.AgentManagementBE.Model.DebtReportID debtReportID) 
     {
-        return agentTypeName;
+        this.debtReportID = debtReportID;
     }
 
-    public void setAgentTypeName(String agentTypeName) 
+    public void setFirstDebt(int firstDebt) 
     {
-        this.agentTypeName = agentTypeName;
+        this.firstDebt = firstDebt;
     }
 
-    public int getMaximumDebt() 
+    public void setLastDebt(int lastDebt) 
     {
-        return maximumDebt;
+        this.lastDebt = lastDebt;
     }
 
-    public void setMaximumDebt(int maximumDebt) 
+    public void setArisenDebt(int arisenDebt) 
     {
-        this.maximumDebt = maximumDebt;
+        this.arisenDebt = arisenDebt;
+    }
+
+    public int getLastDebt() 
+    {
+        return lastDebt;
+    }
+
+    public int getFirstDebt() 
+    {
+        return firstDebt;
+    }
+
+    public int getArisenDebt() 
+    {
+        return arisenDebt;
     }
 }
