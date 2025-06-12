@@ -5,6 +5,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -23,15 +24,19 @@ public class ImportReceipt {
     @Column(name = "totalPrice", nullable = false) // tổng giá
     private int totalPrice;
 
+    // Quan hệ 1-n với ImportDetail (nếu bạn muốn ánh xạ ngược)
+    @OneToMany(mappedBy = "importReceipt", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ImportDetail> importDetails;
+
     public ImportReceipt() {
+    }
+
+    public ImportReceipt(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public ImportReceipt(int importReceiptID, int totalPrice) {
         this.importReceiptID = importReceiptID;
-        this.totalPrice = totalPrice;
-    }
-
-    public ImportReceipt(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -57,5 +62,13 @@ public class ImportReceipt {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public List<ImportDetail> getImportDetails() {
+        return importDetails;
+    }
+
+    public void setImportDetails(List<ImportDetail> importDetails) {
+        this.importDetails = importDetails;
     }
 }
