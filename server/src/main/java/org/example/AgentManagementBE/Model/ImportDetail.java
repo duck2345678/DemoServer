@@ -2,142 +2,137 @@ package org.example.AgentManagementBE.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @IdClass(ImportDetail.ImportDetailID.class)
-public class ImportDetail implements Serializable {
+public class ImportDetail 
+{
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "importReceiptID")
+    private ImportReceipt importReceiptID;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "importReceiptID", nullable = false)
-    @JsonIgnore
-    private ImportReceipt importReceipt;
+    @JoinColumn(name = "productID") // mã sản phẩm
+    private Product productID;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "productID", nullable = false)
-    @JsonIgnore
-    private Product product;
-
-    @Column(name = "quantityImport", nullable = false)
+    @Column(name = "quantityImport") // số lượng nhập
     private int quantityImport;
 
-    @Column(name = "importPrice", nullable = false)
+
+    @Column(name = "importPrice") // giá nhập
     private int importPrice;
 
-    @Column(name = "intoMoney", nullable = false)
+    @Column(name = "intoMoney") // thành tiền
     private int intoMoney;
 
-    @Column(name = "unit", columnDefinition = "VARCHAR(50)")
-    private String unit;
+    @Column(name = "unit") // đơn vị tính
+    private int unit;
 
-    // --- Constructors ---
-    public ImportDetail() {
+    public ImportDetail() 
+    {
+
     }
 
-    public ImportDetail(ImportReceipt importReceipt, Product product, int quantityImport, int importPrice, int intoMoney, String unit) {
-        this.importReceipt = importReceipt;
-        this.product = product;
+    public ImportDetail(ImportReceipt importReceiptID, Product productID, int quantityImport, int importPrice, int intoMoney, int unit) 
+    {
+        this.importReceiptID = importReceiptID;
+        this.productID = productID;
         this.quantityImport = quantityImport;
         this.importPrice = importPrice;
         this.intoMoney = intoMoney;
         this.unit = unit;
     }
 
-    // --- Getters & Setters ---
-
-    public ImportReceipt getImportReceipt() {
-        return importReceipt;
+    public ImportReceipt getImportReceiptID() 
+    {
+        return importReceiptID;
     }
 
-    public void setImportReceipt(ImportReceipt importReceipt) {
-        this.importReceipt = importReceipt;
+    public void setImportReceiptID(ImportReceipt importReceiptID) 
+    {
+        this.importReceiptID = importReceiptID;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProductID() 
+    {
+        return productID;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductID(Product productID) 
+    {
+        this.productID = productID;
     }
 
     public int getQuantityImport() {
         return quantityImport;
     }
 
-    public void setQuantityImport(int quantityImport) {
+    public void setQuantityImport(int quantityImport) 
+    {
         this.quantityImport = quantityImport;
     }
 
-    public int getImportPrice() {
+    public int getImportPrice() 
+    {
         return importPrice;
     }
 
-    public void setImportPrice(int importPrice) {
+    public void setImportPrice(int importPrice) 
+    {
         this.importPrice = importPrice;
     }
 
-    public int getIntoMoney() {
+    public int getIntoMoney() 
+    {
         return intoMoney;
     }
 
-    public void setIntoMoney(int intoMoney) {
+    public void setIntoMoney(int intoMoney) 
+    {
         this.intoMoney = intoMoney;
     }
 
-    public String getUnit() {
+    public int getUnit() 
+    {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(int unit) 
+    {
         this.unit = unit;
     }
 
-    // --- Composite Key Class ---
-    public static class ImportDetailID implements Serializable {
-        private int importReceipt;
-        private int product;
+    public static class ImportDetailID implements Serializable 
+    {
+        private int importReceiptID;
+        private int productID;
 
-        public ImportDetailID() {
+        public ImportDetailID() 
+        {
+
         }
 
-        public ImportDetailID(int importReceipt, int product) {
-            this.importReceipt = importReceipt;
-            this.product = product;
+        public int getImportReceiptID() 
+        {
+            return importReceiptID;
         }
 
-        public int getImportReceipt() {
-            return importReceipt;
+        public void setImportReceiptID(int importReceiptID) 
+        {
+            this.importReceiptID = importReceiptID;
         }
 
-        public void setImportReceipt(int importReceipt) {
-            this.importReceipt = importReceipt;
+        public int getProductID() 
+        {
+            return productID;
         }
 
-        public int getProduct() {
-            return product;
-        }
-
-        public void setProduct(int product) {
-            this.product = product;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof ImportDetailID)) return false;
-            ImportDetailID that = (ImportDetailID) o;
-            return importReceipt == that.importReceipt &&
-                   product == that.product;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(importReceipt, product);
+        public void setProductID(int productID) 
+        {
+            this.productID = productID;
         }
     }
 }
