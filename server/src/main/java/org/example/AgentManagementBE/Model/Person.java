@@ -1,30 +1,32 @@
+package org.example.AgentManagementBE.Model;
+
+import jakarta.persistence.*;   
+
 @Entity
-public class Person {
-
+public class Person 
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_seq")
-    @SequenceGenerator(name = "person_seq", sequenceName = "person_sequence", allocationSize = 1)
-    @Column(name = "personID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "personID") // mã người dùng
     private int personID;
-
-    @Column(name = "personLastName", nullable = false)
+    @Column(name = "personLastName",nullable = false,columnDefinition = "NVARCHAR(255)") // họ
     private String personLastName;
-
-    @Column(name = "personName", nullable = false)
+    @Column(name = "personName",nullable = false,columnDefinition = "NVARCHAR(255)") // tên
     private String personName;
-
-    @Column(name = "personSDT", nullable = false)
+    @Column(name = "personSDT",nullable = false) // số điện thoại
     private String personSDT;
-
-    @Column(name = "personEmail", nullable = false, unique = true)
+    @Column(name = "personEmail",nullable = false,unique = true) // email
     private String personEmail;
-
-    @Column(name = "personPassword", nullable = false)
+    @Column(name = "personPassword",nullable = false) // mật khẩu   
     private String personPassword;
 
-    public Person() {}
+    public Person()
+    {
 
-    public Person(String personLastName, String personName, String personSDT, String personEmail, String personPassword) {
+    }
+
+    public Person(String personLastName, String personName, String personSDT, String personEmail, String personPassword) 
+    {
         this.personLastName = personLastName;
         this.personName = personName;
         this.personSDT = personSDT;
@@ -32,47 +34,58 @@ public class Person {
         this.personPassword = personPassword;
     }
 
-    public int getPersonID() {
+    public int getPersonID() 
+    {
         return personID;
     }
 
-    public String getPersonLastName() {
+    public String getPersonLastName() 
+    {
         return personLastName;
     }
 
-    public void setPersonLastName(String personLastName) {
-        this.personLastName = personLastName;
-    }
-
-    public String getPersonName() {
+    public String getPersonName() 
+    {
         return personName;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
-    }
-
-    public String getPersonSDT() {
+    public String getPersonSDT() 
+    {
         return personSDT;
     }
 
-    public void setPersonSDT(String personSDT) {
-        this.personSDT = personSDT;
-    }
-
-    public String getPersonEmail() {
+    public String getPersonEmail() 
+    {
         return personEmail;
     }
 
-    public void setPersonEmail(String personEmail) {
-        this.personEmail = personEmail;
-    }
-
-    public String getPersonPassword() {
+    public String getPersonPassword() 
+    {
         return personPassword;
     }
 
-    public void setPersonPassword(String personPassword) {
+    public void setPersonLastName(String personLastName) 
+    {
+        this.personLastName = personLastName;
+    }
+
+    public void setPersonName(String personName) 
+    {
+        this.personName = personName;
+    }
+
+    public void setPersonSDT(String personSDT) 
+    {
+        this.personSDT = personSDT;
+    }
+
+    public void setPersonEmail(String personEmail) 
+    {
+        this.personEmail = personEmail;
+    }
+
+    public void setPersonPassword(String personPassword) 
+    {
         this.personPassword = personPassword;
     }
 }
