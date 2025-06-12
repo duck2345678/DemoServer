@@ -1,20 +1,21 @@
-package org.example.AgentManagementBE.Model;
-
-import jakarta.persistence.*;
-
 @Entity
 public class DebtReport {
 
     @EmbeddedId
     private DebtReportID debtReportID;
 
-    @Column(name = "firstDebt", nullable = false) // Số tiền nợ đầu kỳ
+    // Map lại quan hệ bằng cách lấy agentID từ EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "agentID", insertable = false, updatable = false)
+    private Agent agent;
+
+    @Column(name = "firstDebt")
     private int firstDebt;
 
-    @Column(name = "lastDebt", nullable = false) // Số tiền nợ cuối kỳ
+    @Column(name = "lastDebt")
     private int lastDebt;
 
-    @Column(name = "arisenDebt", nullable = false) // Số tiền nợ phát sinh
+    @Column(name = "arisenDebt")
     private int arisenDebt;
 
     public DebtReport() {}
@@ -26,35 +27,23 @@ public class DebtReport {
         this.arisenDebt = arisenDebt;
     }
 
-    public DebtReportID getDebtReportID() {
-        return debtReportID;
-    }
+    public DebtReportID getDebtReportID() { return debtReportID; }
 
-    public void setDebtReportID(DebtReportID debtReportID) {
-        this.debtReportID = debtReportID;
-    }
+    public void setDebtReportID(DebtReportID debtReportID) { this.debtReportID = debtReportID; }
 
-    public int getFirstDebt() {
-        return firstDebt;
-    }
+    public Agent getAgent() { return agent; }
 
-    public void setFirstDebt(int firstDebt) {
-        this.firstDebt = firstDebt;
-    }
+    public void setAgent(Agent agent) { this.agent = agent; }
 
-    public int getLastDebt() {
-        return lastDebt;
-    }
+    public int getFirstDebt() { return firstDebt; }
 
-    public void setLastDebt(int lastDebt) {
-        this.lastDebt = lastDebt;
-    }
+    public void setFirstDebt(int firstDebt) { this.firstDebt = firstDebt; }
 
-    public int getArisenDebt() {
-        return arisenDebt;
-    }
+    public int getLastDebt() { return lastDebt; }
 
-    public void setArisenDebt(int arisenDebt) {
-        this.arisenDebt = arisenDebt;
-    }
+    public void setLastDebt(int lastDebt) { this.lastDebt = lastDebt; }
+
+    public int getArisenDebt() { return arisenDebt; }
+
+    public void setArisenDebt(int arisenDebt) { this.arisenDebt = arisenDebt; }
 }
