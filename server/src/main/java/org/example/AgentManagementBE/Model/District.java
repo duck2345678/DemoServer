@@ -9,7 +9,8 @@ public class District
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "districtID") // mã quận
     private int districtID;
-    @Column(name = "districtName",nullable = false,columnDefinition = "NVARCHAR(255)") // tên quận
+
+    @Column(name = "districtName", nullable = false, columnDefinition = "VARCHAR(255)") // ✅ Đổi từ NVARCHAR sang VARCHAR
     private String districtName;
 
     public District(int districtID) 
@@ -19,13 +20,11 @@ public class District
 
     public District(String districtName) 
     {
-
         this.districtName = districtName;
     }
 
     public District() 
     {
-
     }
 
     public int getDistrictNO() 
