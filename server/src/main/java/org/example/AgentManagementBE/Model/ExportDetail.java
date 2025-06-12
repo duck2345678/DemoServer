@@ -1,91 +1,125 @@
 package org.example.AgentManagementBE.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "ExportDetail")
-public class ExportDetail {
+@IdClass(ExportDetail.ExportDetailID.class)
+public class ExportDetail 
+{
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "exportReceiptID") // mã phiếu xuất
+    private ExportReceipt exportReceiptID;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exportDetailID")
-    private Long exportDetailID; // 👈 Khóa chính tự tăng
+    @ManyToOne
+    @JoinColumn(name = "productID") // mã sản phẩm
+    private Product productID;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exportReceiptID", nullable = false)
-    private ExportReceipt exportReceipt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productID", nullable = false)
-    private Product product;
-
-    @Column(name = "quantityExport", nullable = false)
+    @Column(name = "quantityExport") // số lượng xuất
     private int quantityExport;
 
-    @Column(name = "exportPrice", nullable = false)
+    @Column(name = "exportPrice") // giá xuất
     private int exportPrice;
 
-    @Column(name = "intoMoney", nullable = false)
+    @Column(name = "intoMoney") // thành tiền
     private int intoMoney;
 
-    // Constructors
-    public ExportDetail() {
+
+    public ExportDetail() 
+    {
+
     }
 
-    public ExportDetail(ExportReceipt exportReceipt, Product product, int quantityExport, int exportPrice, int intoMoney) {
-        this.exportReceipt = exportReceipt;
-        this.product = product;
+    public ExportDetail(ExportReceipt exportReceiptID, Product productID, int quantityExport, int exportPrice, int intoMoney) 
+    {
+        this.exportReceiptID = exportReceiptID;
+        this.productID = productID;
         this.quantityExport = quantityExport;
         this.exportPrice = exportPrice;
         this.intoMoney = intoMoney;
     }
 
-    // Getters and Setters
-    public Long getExportDetailID() {
-        return exportDetailID;
+    public ExportReceipt getExportReceiptID() 
+    {
+        return exportReceiptID;
     }
 
-    public void setExportDetailID(Long exportDetailID) {
-        this.exportDetailID = exportDetailID;
+    public void setExportReceiptID(ExportReceipt exportReceiptID) 
+    {
+        this.exportReceiptID = exportReceiptID;
     }
 
-    public ExportReceipt getExportReceipt() {
-        return exportReceipt;
+    public Product getProductID() 
+    {
+        return productID;
     }
 
-    public void setExportReceipt(ExportReceipt exportReceipt) {
-        this.exportReceipt = exportReceipt;
+    public void setProductID(Product productID) 
+    {
+        this.productID = productID;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getQuantityExport() {
+    public int getQuantityExport() 
+    {
         return quantityExport;
     }
 
-    public void setQuantityExport(int quantityExport) {
+    public void setQuantityExport(int quantityExport) 
+    {
         this.quantityExport = quantityExport;
     }
 
-    public int getExportPrice() {
+    public int getExportPrice() 
+    {
         return exportPrice;
     }
 
-    public void setExportPrice(int exportPrice) {
+    public void setExportPrice(int exportPrice) 
+    {
         this.exportPrice = exportPrice;
     }
 
-    public int getIntoMoney() {
+    public int getIntoMoney() 
+    {
         return intoMoney;
     }
 
-    public void setIntoMoney(int intoMoney) {
+    public void setIntoMoney(int intoMoney) 
+    {
         this.intoMoney = intoMoney;
+    }
+
+    public static class ExportDetailID implements Serializable 
+    {
+        private int exportReceiptID;
+        private int productID;
+
+        public ExportDetailID() 
+        {
+
+        }
+
+        public int getExportReceiptID() 
+        {
+            return exportReceiptID;
+        }
+
+        public void setExportReceiptID(int exportReceiptID) 
+        {
+            this.exportReceiptID = exportReceiptID;
+        }
+
+        public int getProductID() 
+        {
+            return productID;
+        }
+
+        public void setProductID(int productID) 
+        {
+            this.productID = productID;
+        }
     }
 }
