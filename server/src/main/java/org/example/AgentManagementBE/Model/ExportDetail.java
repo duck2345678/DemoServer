@@ -2,22 +2,22 @@ package org.example.AgentManagementBE.Model;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 @Entity
-@IdClass(ExportDetail.ExportDetailID.class)
+@Table(name = "ExportDetail")
 public class ExportDetail {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "exportReceiptID", nullable = false)
-    private ExportReceipt exportReceiptID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exportDetailID")
+    private Long exportDetailID; // 👈 Khóa chính tự tăng
 
-    @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exportReceiptID", nullable = false)
+    private ExportReceipt exportReceipt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productID", nullable = false)
-    private Product productID;
+    private Product product;
 
     @Column(name = "quantityExport", nullable = false)
     private int quantityExport;
@@ -28,31 +28,41 @@ public class ExportDetail {
     @Column(name = "intoMoney", nullable = false)
     private int intoMoney;
 
+    // Constructors
     public ExportDetail() {
     }
 
-    public ExportDetail(ExportReceipt exportReceiptID, Product productID, int quantityExport, int exportPrice, int intoMoney) {
-        this.exportReceiptID = exportReceiptID;
-        this.productID = productID;
+    public ExportDetail(ExportReceipt exportReceipt, Product product, int quantityExport, int exportPrice, int intoMoney) {
+        this.exportReceipt = exportReceipt;
+        this.product = product;
         this.quantityExport = quantityExport;
         this.exportPrice = exportPrice;
         this.intoMoney = intoMoney;
     }
 
-    public ExportReceipt getExportReceiptID() {
-        return exportReceiptID;
+    // Getters and Setters
+    public Long getExportDetailID() {
+        return exportDetailID;
     }
 
-    public void setExportReceiptID(ExportReceipt exportReceiptID) {
-        this.exportReceiptID = exportReceiptID;
+    public void setExportDetailID(Long exportDetailID) {
+        this.exportDetailID = exportDetailID;
     }
 
-    public Product getProductID() {
-        return productID;
+    public ExportReceipt getExportReceipt() {
+        return exportReceipt;
     }
 
-    public void setProductID(Product productID) {
-        this.productID = productID;
+    public void setExportReceipt(ExportReceipt exportReceipt) {
+        this.exportReceipt = exportReceipt;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantityExport() {
@@ -77,50 +87,5 @@ public class ExportDetail {
 
     public void setIntoMoney(int intoMoney) {
         this.intoMoney = intoMoney;
-    }
-
-    // ✅ Composite Key Class
-    public static class ExportDetailID implements Serializable {
-        private int exportReceiptID;
-        private int productID;
-
-        public ExportDetailID() {
-        }
-
-        public ExportDetailID(int exportReceiptID, int productID) {
-            this.exportReceiptID = exportReceiptID;
-            this.productID = productID;
-        }
-
-        public int getExportReceiptID() {
-            return exportReceiptID;
-        }
-
-        public void setExportReceiptID(int exportReceiptID) {
-            this.exportReceiptID = exportReceiptID;
-        }
-
-        public int getProductID() {
-            return productID;
-        }
-
-        public void setProductID(int productID) {
-            this.productID = productID;
-        }
-
-        // ✅ Cần override để JPA xử lý composite key đúng
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof ExportDetailID)) return false;
-            ExportDetailID that = (ExportDetailID) o;
-            return exportReceiptID == that.exportReceiptID &&
-                   productID == that.productID;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(exportReceiptID, productID);
-        }
     }
 }
