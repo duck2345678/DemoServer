@@ -2,23 +2,26 @@ package org.example.AgentManagementBE.Model;
 
 import jakarta.persistence.*;
 
-@Entity(name = "Unit")
+@Entity
+@Table(name = "Unit") // Tên bảng trùng với tên trong Flyway
 public class Unit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "unitID") // mã đơn vị tính
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Tương thích với SERIAL trong PostgreSQL
+    @Column(name = "unitID")
     private int unitID;
 
-    @Column(name = "unitName", nullable = false, length = 255) // tên đơn vị tính
+    @Column(name = "unitName", nullable = false, length = 255)
     private String unitName;
 
+    // Constructors
     public Unit() {}
 
     public Unit(String unitName) {
         this.unitName = unitName;
     }
 
+    // Getters & Setters
     public int getUnitID() {
         return unitID;
     }
