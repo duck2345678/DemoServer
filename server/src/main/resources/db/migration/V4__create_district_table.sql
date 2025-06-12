@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS district (
+    districtID SERIAL PRIMARY KEY,
+    districtName VARCHAR(255) NOT NULL
+);
